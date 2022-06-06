@@ -6,6 +6,8 @@ on:
 jobs:
   job1:
     uses: martins-vds-org/reusable-workflows/.github/workflows/called-workflow.yml@main
+    with:
+      username: 'Vinny'
 
   job2:
     runs-on: ubuntu-latest
