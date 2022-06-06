@@ -9,12 +9,24 @@ on:
     secrets:
       token:
         required: true
+    outputs:
+      firstword:
+        description: "The first output string"
+        value: ${{ jobs.example_job.outputs.output1 }}
+      secondword:
+        description: "The second output string"
+        value: ${{ jobs.example_job.outputs.output2 }}
 
 jobs:
   example_job:
-    name: Pass input and secrets to my-action
+    name: Generate output
     runs-on: ubuntu-latest
-    env:
-      USERNAME: ${{ inputs.username }}
+    # Map the job outputs to step outputs
+    outputs:
+      output1: ${{ steps.step1.outputs.firstword }}
+      output2: ${{ steps.step2.outputs.secondword }}
     steps:
-    - run: echo 'Hello $USERNAME'
+      - id: step1
+        run: echo "::set-output name=firstword::hello"
+      - id: step2
+        run: echo "::set-output name=secondword::${{ inputs.username }}"
