@@ -8,6 +8,8 @@ jobs:
     uses: martins-vds-org/reusable-workflows/.github/workflows/called-workflow.yml@main
     with:
       username: 'Vinny'
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   job2:
     runs-on: ubuntu-latest
